@@ -11,9 +11,8 @@ fn main() -> std::io::Result<()> {
     let ts = types::Timespec::new().sec(1);
     let timeout_e = opcode::LinkTimeout::new(&ts).build().user_data(2);
 
-    // build a single read-at-offset SQE
     let read_e = opcode::Read::new(fd, buf.as_mut_ptr(), buf.len() as _)
-        .offset(0) // read from file offset 0
+        .offset(0)
         .build()
         .user_data(1)
         .flags(Flags::IO_LINK); // link the timeout to the read
@@ -23,7 +22,7 @@ fn main() -> std::io::Result<()> {
         sq.push(&read_e).unwrap();
         sq.push(&timeout_e).unwrap();
     }
-    ring.submit_and_wait(1)?; // block until at least 1 CQE
+    ring.submit_and_wait(1)?;
 
     for ceq in ring.completion() {
         match ceq.user_data() {
