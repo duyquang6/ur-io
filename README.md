@@ -8,7 +8,7 @@ experiments with `io-uring` in Rust - exploring high-performance asynchronous I/
 - **echo**: TCP echo server using io-uring operations
 - **hello-buffer**: Zero-copy I/O with registered buffers
 - **hello-timeout**: Operation chaining with timeouts
-- **udp-log-agent**: UDP log-agent collector (WIP)
+- **socket-log-agent**: UDP/TCP log-agent collector (WIP)
 
 ## requirements
 
