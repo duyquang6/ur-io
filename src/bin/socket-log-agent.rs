@@ -27,7 +27,7 @@ const BUF_SIZE: usize = 2048; // 2 KiB per buffer
 const BUF_COUNT: usize = 512; // Total: 1 MiB
 const BUF_GROUP_ID: u16 = 1;
 const LOG_FILE: &str = "logs.bin";
-const LOG_MMAP_SIZE: usize = 1 * 1024 * 1024; // 1 MB
+const LOG_MMAP_SIZE: usize = 100 * 1024 * 1024; // 100 MB
 
 /// Log record representation
 struct LogEntry<'a> {
@@ -226,6 +226,8 @@ fn main() -> std::io::Result<()> {
                 eprintln!("Storage error: {}", e);
                 break;
             }
+
+            // TODO: re-provide buffer to re-used buffer pool
 
             // stats
             packet_count += 1;
